@@ -4,6 +4,7 @@ from .models import (
   LineImage,
   LineVideo,
   LineAudio,
+  LineFile,
 )
 
 
@@ -53,3 +54,21 @@ class LineAudioSerializer(serializers.ModelSerializer):
       "webhook_event_id",
       "timestamp",
     ]
+
+
+class LineFileSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = LineFile
+    fields = [
+      "file_url",
+      "filename",
+      "filesize_bytes",
+      "content_provider",
+      "source_type",
+      "reply_token",
+      "is_redelivery",
+      "user_id",
+      "webhook_event_id",
+      "timestamp",
+    ]
+
