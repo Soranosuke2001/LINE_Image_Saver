@@ -77,3 +77,30 @@ def construct_image_data(data):
     "webhook_event_id": data['webhookEventId'],
     "timestamp": dt_obj,
   }
+
+
+# Create filtered data object (video endpoint)
+def construct_video_data(data):
+  content_provider = data['message']['contentProvider']['type']
+  dt_obj = convert_timestamp(data['timestamp'])
+
+  if content_provider == 'line':
+    video_url = data['message']['id']
+    preview_image_url = ''
+  else:
+    video_url = data['message']['contentProvider']['originalContentUrl']
+    preview_image_url = data['message']['contentProvider']['previewImageUrl']
+
+  return {
+    "video_url": video_url,
+    "preview_image_url": preview_image_url,
+    "duration_ms": data['message']['duration'],
+    "content_provider": content_provider,
+    "source_type": data['source']['type'],
+    "reply_token": data['replyToken'],
+    "is_redelivery": data['deliveryContext']['isRedelivery'],
+    "user_id": data['source']['userId'],
+    "webhook_event_id": data['webhookEventId'],
+    "timestamp": dt_obj,
+  }
+
