@@ -126,3 +126,33 @@ def construct_audio_data(data):
     "webhook_event_id": data['webhookEventId'],
     "timestamp": dt_obj,
   }
+
+
+# Create filtered data object (file endpoint)
+def construct_file_data(data):
+  content_provider = data['message']['contentProvider']['type']
+  dt_obj = convert_timestamp(data['timestamp'])
+
+  if content_provider == 'line':
+    file_url = data['message']['id']
+  else:
+    file_url = data['message']['contentProvider']['originalContentUrl']
+
+  if data['message']['fileName']:
+    filename = data['message']['fileName']
+  else:
+    filename = ''
+
+  return {
+    "file_url": file_url,
+    "filename": filename,
+    "filesize_bytes": data['message']['fileSize'],
+    "content_provider": content_provider,
+    "source_type": data['source']['type'],
+    "reply_token": data['replyToken'],
+    "is_redelivery": data['deliveryContext']['isRedelivery'],
+    "user_id": data['source']['userId'],
+    "webhook_event_id": data['webhookEventId'],
+    "timestamp": dt_obj,
+  }
+
