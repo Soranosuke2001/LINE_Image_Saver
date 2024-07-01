@@ -160,3 +160,45 @@ class S3FileUploadEvent(APIView):
   def delete(self, request, *args, **kwargs):
     S3LineFile.objects.all().delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+  
+
+class S3ImageFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step here
+    # ....
+    s3_images = S3LineImage.objects.all()
+
+    serializer = S3LineImageSerializer(s3_images, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class S3VideoFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step here
+    # ....
+    s3_videos = S3LineVideo.objects.all()
+
+    serializer = S3LineVideoSerializer(s3_videos, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class S3AudioFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step here
+    # ....
+    s3_audios = S3LineAudio.objects.all()
+
+    serializer = S3LineAudioSerializer(s3_audios, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class S3FileFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step here
+    # ....
+    s3_videos = S3LineFile.objects.all()
+
+    serializer = S3LineFileSerializer(s3_videos, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+    
