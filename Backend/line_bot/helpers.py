@@ -104,3 +104,25 @@ def construct_video_data(data):
     "timestamp": dt_obj,
   }
 
+
+# Create filtered data object (audio endpoint)
+def construct_audio_data(data):
+  content_provider = data['message']['contentProvider']['type']
+  dt_obj = convert_timestamp(data['timestamp'])
+
+  if content_provider == 'line':
+    audio_url = data['message']['id']
+  else:
+    audio_url = data['message']['contentProvider']['originalContentUrl']
+
+  return {
+    "audio_url": audio_url,
+    "duration_ms": data['message']['duration'],
+    "content_provider": content_provider,
+    "source_type": data['source']['type'],
+    "reply_token": data['replyToken'],
+    "is_redelivery": data['deliveryContext']['isRedelivery'],
+    "user_id": data['source']['userId'],
+    "webhook_event_id": data['webhookEventId'],
+    "timestamp": dt_obj,
+  }
