@@ -17,6 +17,7 @@ from .helpers import (
   construct_image_data,
   construct_video_data,
   construct_audio_data,
+  construct_file_data,
 )
 
 from .models import (
@@ -177,3 +178,48 @@ class LineFileEvent(APIView):
   def delete(self, request, *args, **kwargs):
     LineFile.objects.all().delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class LineImageFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step
+    # ...
+
+    uploaded_images = LineImage.objects.all()
+
+    serializer = LineImageSerializer(uploaded_images, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class LineVideoFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step
+    # ...
+    uploaded_videos = LineVideo.objects.all()
+
+    serializer = LineVideoSerializer(uploaded_videos, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class LineAudioFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step
+    # ...
+    
+    uploaded_audios = LineAudio.objects.all()
+
+    serializer = LineAudioSerializer(uploaded_audios, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class LineFileFetchEvent(APIView):
+  def get(self, request, format=None):
+    # Add some verification step
+    # ...
+
+    uploaded_files = LineFile.objects.all()
+
+    serializer = LineFileSerializer(uploaded_files, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+  
+  
