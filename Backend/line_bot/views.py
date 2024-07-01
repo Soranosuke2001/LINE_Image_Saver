@@ -16,6 +16,7 @@ from .helpers import (
   forward_request,
   construct_image_data,
   construct_video_data,
+  construct_audio_data,
 )
 
 from .models import (
