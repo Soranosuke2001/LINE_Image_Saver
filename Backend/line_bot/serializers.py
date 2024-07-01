@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import (
   LineImage,
   LineVideo,
+  LineAudio,
 )
 
 
@@ -35,4 +36,20 @@ class LineVideoSerializer(serializers.ModelSerializer):
       "user_id",
       "webhook_event_id",
       "timestamp",
-    ]    
+    ]
+
+
+class LineAudioSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = LineAudio
+    fields = [
+      "audio_url",
+      "duration_ms",
+      "content_provider",
+      "source_type",
+      "reply_token",
+      "is_redelivery",
+      "user_id",
+      "webhook_event_id",
+      "timestamp",
+    ]
