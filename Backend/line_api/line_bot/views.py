@@ -183,6 +183,7 @@ class LineFileEvent(APIView):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class LineImageFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step
@@ -194,6 +195,7 @@ class LineImageFetchEvent(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class LineVideoFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step
@@ -204,6 +206,7 @@ class LineVideoFetchEvent(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class LineAudioFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step
@@ -215,6 +218,7 @@ class LineAudioFetchEvent(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class LineFileFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step

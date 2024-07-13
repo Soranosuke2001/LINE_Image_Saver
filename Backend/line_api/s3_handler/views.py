@@ -4,6 +4,9 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 import boto3
 
 from .serializers import (
@@ -31,6 +34,7 @@ s3 = boto3.client('s3')
 
 
 # Create your views here.
+@method_decorator(csrf_exempt, name='dispatch')
 class S3ImageUploadEvent(APIView):
   def post(self, request, format=None):
     filtered_data, image_id, object_path = construct_filtered_data(request.data, 'image')
@@ -66,6 +70,7 @@ class S3ImageUploadEvent(APIView):
     return Response(status=status.HTTP_204_NO_CONTENT)
   
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3VideoUploadEvent(APIView):
   def post(self, request, format=None):
     filtered_data, video_id, object_path = construct_filtered_data(request.data, 'video')
@@ -98,6 +103,7 @@ class S3VideoUploadEvent(APIView):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3AudioUploadEvent(APIView):
   def post(self, request, format=None):
     filtered_data, audio_id, object_path = construct_filtered_data(request.data, 'audio')
@@ -130,6 +136,7 @@ class S3AudioUploadEvent(APIView):
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3FileUploadEvent(APIView):
   def post(self, request, format=None):
     filtered_data, file_id, object_path = construct_filtered_data(request.data, 'file')
@@ -162,6 +169,7 @@ class S3FileUploadEvent(APIView):
     return Response(status=status.HTTP_204_NO_CONTENT)
   
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3ImageFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step here
@@ -172,6 +180,7 @@ class S3ImageFetchEvent(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3VideoFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step here
@@ -182,6 +191,7 @@ class S3VideoFetchEvent(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3AudioFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step here
@@ -192,6 +202,7 @@ class S3AudioFetchEvent(APIView):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class S3FileFetchEvent(APIView):
   def get(self, request, format=None):
     # Add some verification step here
