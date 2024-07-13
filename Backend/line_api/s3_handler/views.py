@@ -173,22 +173,42 @@ class S3FileUploadEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3ImageFetchEvent(APIView):
   def get(self, request, format=None):
-    month = request.query_params.get('month')
-    year = request.query_params.get('year')
+    initial = request.query_params.get('initial')
 
-    if not month or not year:
-      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
-    
-    try:
-      month = int(month)
-      year = int(year)
-    except ValueError:
-      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+    if initial:
+      recent_image = S3LineImage.objects.all().order_by('-timestamp').first()
+
+      if not recent_image:
+        return Response([], status=status.HTTP_200_OK)
+      
+      month = recent_image.timestamp.month
+      year = recent_image.timestamp.year
+    else:
+      month = request.query_params.get('month')
+      year = request.query_params.get('year')
+
+      if not month or not year:
+        return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+      
+      try:
+        month = int(month)
+        year = int(year)
+      except ValueError:
+        return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
 
     s3_images = S3LineImage.objects.annotate(month=ExtractMonth('timestamp'), year=ExtractYear('timestamp')).filter(month=month, year=year).order_by('-timestamp')
-
     serializer = S3LineImageSerializer(s3_images, many=True)
+
+    data = {
+      'media_files': serializer.data,
+      'month': month,
+      'year': year,
+    }
+
+    if initial:
+      return Response(data, status=status.HTTP_200_OK)
     return Response(serializer.data, status=status.HTTP_200_OK)
+    
 
 
 @method_decorator(csrf_exempt, name='dispatch')
