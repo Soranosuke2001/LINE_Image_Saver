@@ -185,8 +185,6 @@ class S3ImageFetchEvent(APIView):
     except ValueError:
       return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
 
-    
-      
     s3_images = S3LineImage.objects.annotate(month=ExtractMonth('timestamp'), year=ExtractYear('timestamp')).filter(month=month, year=year).order_by('-timestamp')
 
     serializer = S3LineImageSerializer(s3_images, many=True)
@@ -196,9 +194,19 @@ class S3ImageFetchEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3VideoFetchEvent(APIView):
   def get(self, request, format=None):
-    # Add some verification step here
-    # ....
-    s3_videos = S3LineVideo.objects.all()
+    month = request.query_params.get('month')
+    year = request.query_params.get('year')
+
+    if not month or not year:
+      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+      month = int(month)
+      year = int(year)
+    except ValueError:
+      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+
+    s3_videos = S3LineVideo.objects.annotate(month=ExtractMonth('timestamp'), year=ExtractYear('timestamp')).filter(month=month, year=year).order_by('-timestamp')
 
     serializer = S3LineVideoSerializer(s3_videos, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -207,9 +215,19 @@ class S3VideoFetchEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3AudioFetchEvent(APIView):
   def get(self, request, format=None):
-    # Add some verification step here
-    # ....
-    s3_audios = S3LineAudio.objects.all()
+    month = request.query_params.get('month')
+    year = request.query_params.get('year')
+
+    if not month or not year:
+      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+      month = int(month)
+      year = int(year)
+    except ValueError:
+      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+
+    s3_audios = S3LineAudio.objects.annotate(month=ExtractMonth('timestamp'), year=ExtractYear('timestamp')).filter(month=month, year=year).order_by('-timestamp')
 
     serializer = S3LineAudioSerializer(s3_audios, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
@@ -218,11 +236,21 @@ class S3AudioFetchEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3FileFetchEvent(APIView):
   def get(self, request, format=None):
-    # Add some verification step here
-    # ....
-    s3_videos = S3LineFile.objects.all()
+    month = request.query_params.get('month')
+    year = request.query_params.get('year')
 
-    serializer = S3LineFileSerializer(s3_videos, many=True)
+    if not month or not year:
+      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+      month = int(month)
+      year = int(year)
+    except ValueError:
+      return Response("Invalid Request", status=status.HTTP_400_BAD_REQUEST)
+
+    s3_files = S3LineFile.objects.annotate(month=ExtractMonth('timestamp'), year=ExtractYear('timestamp')).filter(month=month, year=year).order_by('-timestamp')
+
+    serializer = S3LineFileSerializer(s3_files, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
     
