@@ -37,7 +37,7 @@ from .serializers import (
 CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET', None)
 
 if CHANNEL_SECRET is None:
-  raise ValueError("THe LINE_CHANNEL_SECRET value is not set")
+  raise ValueError("The LINE_CHANNEL_SECRET value is not set")
 
 handler = WebhookHandler(CHANNEL_SECRET)
 
