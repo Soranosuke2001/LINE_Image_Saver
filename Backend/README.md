@@ -40,6 +40,8 @@ BUCKET_NAME=
 AWS_REGION=
 
 IMAGE_FORMAT=JPEG
+
+DJANGO_SECRET_KEY=
 ```
 
 `ALLOWED_HOSTS`: If using a custom domain name, add the domain name at the end (`,` separated)
@@ -54,10 +56,12 @@ Note: You will need to create a new AWS AMI user with the permissions to READ an
 `AWS_ACCESS_KEY`: From AMI user
 `AWS_SECRET_ACCESS_KEY`: From AMI user
 
-`BUCKET_NAME`: You will need to create a new S3 bucket and provide the name of it here.
+`BUCKET_NAME`: You will need to create a new S3 bucket and provide the name of it here
 `AWS_REGION`: The region abbreviation of where the bucket is hosted
 
 `IMAGE_FORMAT`: The image file format when saving to the bucket
+
+`DJANGO_SECRET_KEY`: The secret key for the application
 
 ### 4. Database Migrations
 
