@@ -18,3 +18,17 @@ export type ImageType = {
   month: string;
   year: string;
 };
+
+export type VideoData = {
+  video_id: string;
+  video_url: string;
+  preview_image_url: string;
+  duration: number;
+  timestamp: Date
+}
+
+export type VideoType = {
+  data: VideoData[];
+  month: string;
+  year: string;
+};
