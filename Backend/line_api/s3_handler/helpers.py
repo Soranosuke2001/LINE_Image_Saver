@@ -39,6 +39,31 @@ def s3_upload(s3, body, object_name, file_type, content_type=None):
   return False
 
 
+def s3_delete(s3, object_name=None):
+  try:
+    if object_name:
+      s3.delete_object(Bucket=BUCKET_NAME, Key=object_name)
+      print(f"{object_name} has been deleted from {BUCKET_NAME}")
+
+      return True
+    else:
+      all_objs =  s3.list_objects_v2(Bucket=BUCKET_NAME)
+      if 'Contents' in all_objs:
+        for obj in all_objs['Contents']:
+          s3.delete_object(Bucket=BUCKET_NAME, Key=obj['Key'])
+          print(f"Deleted object {obj['Key']} from bucket {BUCKET_NAME}")
+      else:
+        print(f"No objects found in bucket {BUCKET_NAME}")
+
+      return True
+      
+  except Exception as e:
+     print("There was an error:")
+     print(e)
+  
+  return False
+
+
 # Get the month from datetime object
 def get_month(timestamp):
   date_format = "%Y-%m-%dT%H:%M:%S.%f"

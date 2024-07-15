@@ -30,7 +30,8 @@ from .helpers import (
   construct_filtered_video_data,
   fetch_binary_data,
   binary_image_convert,
-  s3_upload
+  s3_upload,
+  s3_delete,
 )
 
 s3 = boto3.client('s3')
@@ -70,6 +71,11 @@ class S3ImageUploadEvent(APIView):
   
   def delete(self, request, *args, **kwargs):
     S3LineImage.objects.all().delete()
+    s3_delete_state = s3_delete(s3)
+
+    if not s3_delete_state:
+      return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     return Response(status=status.HTTP_204_NO_CONTENT)
   
 
@@ -103,6 +109,11 @@ class S3VideoUploadEvent(APIView):
   
   def delete(self, request, *args, **kwargs):
     S3LineVideo.objects.all().delete()
+    s3_delete_state = s3_delete(s3)
+
+    if not s3_delete_state:
+      return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -136,6 +147,11 @@ class S3AudioUploadEvent(APIView):
   
   def delete(self, request, *args, **kwargs):
     S3LineAudio.objects.all().delete()
+    s3_delete_state = s3_delete(s3)
+
+    if not s3_delete_state:
+      return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -169,6 +185,11 @@ class S3FileUploadEvent(APIView):
   
   def delete(self, request, *args, **kwargs):
     S3LineFile.objects.all().delete()
+    s3_delete_state = s3_delete(s3)
+
+    if not s3_delete_state:
+      return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
     return Response(status=status.HTTP_204_NO_CONTENT)
   
 
