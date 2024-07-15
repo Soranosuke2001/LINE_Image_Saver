@@ -34,7 +34,7 @@ const VideoFrame = ({ video }: { video: VideoData }) => {
         <div className="flex flex-col">
           <span>{video.video_id}</span>
           <span>{video.duration}</span>
-          <span>{video.timestamp.toISOString().split('T')[0]}</span>
+          <span>{video.timestamp.split('T')[0]}</span>
         </div>
       </div>
       {isModalOpen && selectedVideo && (

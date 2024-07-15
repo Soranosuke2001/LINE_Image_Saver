@@ -10,7 +10,7 @@ export type CustomImage = {
 export type ImageData = {
   image_id: string;
   image_url: string;
-  timestamp: Date;
+  timestamp: string;
 };
 
 export type ImageType = {
@@ -24,8 +24,8 @@ export type VideoData = {
   video_url: string;
   preview_image_url: string;
   duration: number;
-  timestamp: Date
-}
+  timestamp: string;
+};
 
 export type VideoType = {
   data: VideoData[];
