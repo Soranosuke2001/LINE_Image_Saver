@@ -13,39 +13,9 @@ export const fetchMediaFiles = async (mediaType: string) => {
     return "NoData";
   }
 
-  let mediaFiles = null;
-
-  if (mediaType === "image") {
-    mediaFiles = data.map((image: any) => {
-      return {
-        ...image,
-        timestamp: new Date(image.timestamp),
-      };
-    });
-  } else if (mediaType === "video") {
-    mediaFiles = data.map((video: any) => {
-      return {
-        ...video,
-        timestamp: new Date(video.timestamp),
-      };
-    });
-  } else if (mediaType === "audio") {
-    mediaFiles = data.map((audio: any) => {
-      return {
-        ...audio,
-      };
-    });
-  } else {
-    mediaFiles = data.map((file: any) => {
-      return {
-        ...file,
-      };
-    });
-  }
-
   return [
     {
-      data: mediaFiles,
+      data,
       month,
       year,
     },

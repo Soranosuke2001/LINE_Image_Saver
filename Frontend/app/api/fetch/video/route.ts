@@ -40,8 +40,15 @@ export async function GET() {
     cookies().set('video_month', new_month.toString())
     cookies().set('video_year', new_year.toString())
 
+    const formatted_files = media_files.map((video: any) => {
+      return {
+        ...video,
+        timestamp: new Date(video.timestamp),
+      };
+    });
+
     // @ts-ignore
-    return NextResponse.json({ message: media_files, month: monthMap[month], year }, { status: 200 })
+    return NextResponse.json({ message: formatted_files, month: monthMap[month], year }, { status: 200 })
   }
 
   // The other case, fetching the next month
@@ -69,6 +76,13 @@ export async function GET() {
   cookies().set('video_month', new_month.toString())
   cookies().set('video_year', new_year.toString())
 
+  const formatted_files = response.data.map((video: any) => {
+    return {
+      ...video,
+      timestamp: new Date(video.timestamp),
+    };
+  });
+
   // @ts-ignore
-  return NextResponse.json({ message: response.data, month: monthMap[month], year }, { status: 200 })
+  return NextResponse.json({ message: formatted_files, month: monthMap[month], year }, { status: 200 })
 }
