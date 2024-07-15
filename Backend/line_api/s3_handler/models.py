@@ -15,7 +15,7 @@ class S3LineImage(models.Model):
 class S3LineVideo(models.Model):
   video_id = models.CharField(max_length=256)
   video_url = models.CharField(max_length=256)
-  preview_image_url = models.CharField(max_length=256)
+  preview_image_url = models.CharField(max_length=256, blank=True)
   duration = models.IntegerField()
   user_id = models.CharField(max_length=256)
   timestamp = models.DateTimeField()
