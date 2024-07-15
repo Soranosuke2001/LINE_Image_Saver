@@ -45,6 +45,7 @@ export async function GET() {
       return {
         ...file,
         filesize: formatBytes(file.filesize_bytes),
+        extension: file.filename.split('.').pop(),
         timestamp: new Date(file.timestamp),
       };
     });

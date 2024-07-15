@@ -32,7 +32,8 @@ export type FileData = {
   file_id: string;
   file_url: string;
   filename: string;
-  filesize_bytes: number;
+  filesize: string;
+  extension: string;
   duration: number;
   timestamp: string;
 };
