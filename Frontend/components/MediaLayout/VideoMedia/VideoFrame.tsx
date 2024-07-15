@@ -23,18 +23,34 @@ const VideoFrame = ({ video }: { video: VideoData }) => {
 
   return (
     <>
-      <div className="w-full border border-solid border-black" onClick={() => openModal(video.video_url)}>
+      <div
+        className="w-full rounded-lg border border-black border-solid"
+        onClick={() => openModal(video.video_url)}
+      >
         {video.preview_image_url === "" ? (
-          <div className="w-full h-24 flex justify-center items-center bg-black">
-            <FaCirclePlay size={30} className="text-neutral-300"/>
+          <div className="w-full h-28 flex justify-center items-center bg-black">
+            <FaCirclePlay size={30} className="text-neutral-300" />
           </div>
         ) : (
-          <img src={video.preview_image_url} alt="Video preview image" />
+          <div
+            className='w-full h-28 flex justify-center items-center bg-cover bg-center'
+            style={{
+              backgroundImage: `url(${video.preview_image_url})`
+            }}
+          >
+            <FaCirclePlay size={30} className="text-neutral-300" />
+          </div>
         )}
-        <div className="flex flex-col">
-          <span>{video.video_id}</span>
-          <span>{video.duration}</span>
-          <span>{video.timestamp.split('T')[0]}</span>
+        <div className="flex flex-col p-2">
+          <span className="font-bold text-lg truncate">{video.video_id}</span>
+          <span className="flex justify-between font-light">
+            <span>Duration:</span>
+            <span>{video.duration}</span>
+          </span>
+          <span className="flex justify-between font-light">
+            <span>Date:</span>
+            <span>{video.timestamp.split("T")[0]}</span>
+          </span>
         </div>
       </div>
       {isModalOpen && selectedVideo && (
