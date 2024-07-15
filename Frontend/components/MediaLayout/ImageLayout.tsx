@@ -17,7 +17,7 @@ const ImageLayout = ({
 }) => {
   return (
     <div className="flex-1 mt-12 w-full overflow-auto border-4 border-solid border-white">
-      {noData && <NoData />}
+      {noData && mediaFiles.length === 0 && <NoData />}
       {mediaFiles.map(({ data, month, year }, index) => (
         <div key={index} className="mb-5">
           <SectionTitle year={year} month={month} />
