@@ -25,6 +25,8 @@ class S3LineVideoSerializer(serializers.ModelSerializer):
     fields = [
       "video_id",
       "video_url",
+      "preview_image_url",
+      "duration",
       "user_id",
       "timestamp",
     ]

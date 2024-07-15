@@ -26,6 +26,8 @@ from .models import (
 
 from .helpers import (
   construct_filtered_data,
+  construct_filtered_image_data,
+  construct_filtered_video_data,
   fetch_binary_data,
   binary_image_convert,
   s3_upload
@@ -38,7 +40,7 @@ s3 = boto3.client('s3')
 @method_decorator(csrf_exempt, name='dispatch')
 class S3ImageUploadEvent(APIView):
   def post(self, request, format=None):
-    filtered_data, image_id, object_path = construct_filtered_data(request.data, 'image')
+    filtered_data, image_id, object_path = construct_filtered_image_data(request.data, 'image')
 
     # save the image details to the model
     serializer = S3LineImageSerializer(data=filtered_data)
@@ -74,7 +76,7 @@ class S3ImageUploadEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3VideoUploadEvent(APIView):
   def post(self, request, format=None):
-    filtered_data, video_id, object_path = construct_filtered_data(request.data, 'video')
+    filtered_data, video_id, object_path = construct_filtered_video_data(request.data, 'video')
 
     # save the image details to the model
     serializer = S3LineVideoSerializer(data=filtered_data)

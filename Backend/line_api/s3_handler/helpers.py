@@ -74,6 +74,40 @@ def fetch_binary_data(id):
     return response
 
 
+def construct_filtered_image_data(data):
+    id = data['image_url']
+    user_id = data['user_id']
+    timestamp, month_taken = get_month(data['timestamp'])
+    object_path = f'{user_id}/{month_taken}/{id}'
+    url = f'https://{BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_path}'
+
+    return {
+        'image_id': id,
+        'image_url': url,
+        "user_id": user_id,
+        "timestamp": timestamp,
+    }, id, object_path
+   
+
+def construct_filtered_video_data(data):
+    id = data['video_url']
+    user_id = data['user_id']
+    preview_image_url = data['preview_image_url']
+    duration = data['duration_ms']
+    timestamp, month_taken = get_month(data['timestamp'])
+    object_path = f'{user_id}/{month_taken}/{id}'
+    url = f'https://{BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_path}'
+
+    return {
+        'video_id': id,
+        'video_url': url,
+        'preview_image_url': preview_image_url,
+        'duration': duration,
+        "user_id": user_id,
+        "timestamp": timestamp,
+    }, id, object_path
+
+
 # Created filtered data object
 def construct_filtered_data(data, event_type):
     id = data[f'{event_type}_url']
