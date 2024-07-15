@@ -5,6 +5,7 @@ import SectionTitle from "./SectionTitle";
 import ImageLayout from "./ImageMedia/ImageLayout";
 
 import VideoLayout from "./VideoMedia/VideoLayout";
+import AudioLayout from "./AudioMedia/AudioLayout";
 
 const MediaLayout = ({
   mediaType,
@@ -30,6 +31,9 @@ const MediaLayout = ({
             )}
             {mediaType === "video" && (
               <VideoLayout videoData={data} noData={noData} refProp={refProp}/>
+            )}
+            {mediaType === "audio" && (
+              <AudioLayout audioData={data} noData={noData} refProp={refProp}/>
             )}
           </div>
         </div>

@@ -32,3 +32,16 @@ export type VideoType = {
   month: string;
   year: string;
 };
+
+export type AudioData = {
+  audio_id: string;
+  audio_url: string;
+  duration: number;
+  timestamp: string;
+};
+
+export type FileType = {
+  data: VideoData[];
+  month: string;
+  year: string;
+};
