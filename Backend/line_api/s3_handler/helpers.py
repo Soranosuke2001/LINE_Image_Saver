@@ -155,7 +155,6 @@ def construct_filtered_file_data(data):
     filename = data['filename']
     filesize_bytes = data['filesize_bytes']
     user_id = data['user_id']
-    duration = data['duration_ms']
     timestamp, month_taken = get_month(data['timestamp'])
     object_path = f'{user_id}/{month_taken}/{id}'
     url = f'https://{BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_path}'
@@ -165,7 +164,6 @@ def construct_filtered_file_data(data):
         'file_url': url,
         'filename': filename,
         'filesize_bytes': filesize_bytes,
-        'duration': duration,
         "user_id": user_id,
         "timestamp": timestamp,
     }, id, object_path
