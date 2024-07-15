@@ -1,7 +1,9 @@
+import { HamburgerMenu } from "@/components/HamburgerMenu";
+
 export default function Home() {
   return (
-    <main className="">
-      <h1>Welcome to the Home Page</h1>
+    <main className="h-screen">
+      <HamburgerMenu />
     </main>
   );
 }
