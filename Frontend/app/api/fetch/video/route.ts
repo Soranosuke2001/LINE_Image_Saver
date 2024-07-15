@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { monthMap } from "@/lib/constants";
+import { msToTime } from "@/lib/convertDuration";
 
 export async function GET() {
   const month = cookies().get('video_month')?.value
@@ -43,6 +44,7 @@ export async function GET() {
     const formatted_files = media_files.map((video: any) => {
       return {
         ...video,
+        duration: msToTime(video.duration),
         timestamp: new Date(video.timestamp),
       };
     });
@@ -79,6 +81,7 @@ export async function GET() {
   const formatted_files = response.data.map((video: any) => {
     return {
       ...video,
+      duration: msToTime(video.duration),
       timestamp: new Date(video.timestamp),
     };
   });
