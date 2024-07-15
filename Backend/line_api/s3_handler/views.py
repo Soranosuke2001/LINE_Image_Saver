@@ -41,7 +41,7 @@ s3 = boto3.client('s3')
 @method_decorator(csrf_exempt, name='dispatch')
 class S3ImageUploadEvent(APIView):
   def post(self, request, format=None):
-    filtered_data, image_id, object_path = construct_filtered_image_data(request.data, 'image')
+    filtered_data, image_id, object_path = construct_filtered_image_data(request.data)
 
     # save the image details to the model
     serializer = S3LineImageSerializer(data=filtered_data)
