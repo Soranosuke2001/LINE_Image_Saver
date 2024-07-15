@@ -21,6 +21,10 @@ export async function GET() {
 
     const { media_files, month, year } = response.data
 
+    if (media_files.length === 0 && !month && !year) {
+      return NextResponse.json({ message: media_files, month: undefined, year: undefined })
+    }
+
     let new_month: number = +month
     let new_year: number = +year
 
