@@ -41,9 +41,11 @@ const mediaSelections = [
 const MediaTypeSelector = ({
   mediaType,
   setMediaType,
+  setMediaFiles,
 }: {
   mediaType: string;
   setMediaType: Dispatch<SetStateAction<string>>;
+  setMediaFiles: Dispatch<SetStateAction<any>>;
 }) => {
   const cookieStore = useCookies();
 
@@ -63,6 +65,7 @@ const MediaTypeSelector = ({
                 cookieStore.remove(`${mediaType}_month`);
                 cookieStore.remove(`${mediaType}_year`);
                 setMediaType(type);
+                setMediaFiles([])
               }}
             >
               {icon}

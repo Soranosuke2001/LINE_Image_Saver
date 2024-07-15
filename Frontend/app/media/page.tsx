@@ -35,6 +35,7 @@ export default function Page() {
       } else if (data === "NoData") {
         setNoData(true)
       } else {
+        setNoData(false)
         setMediaFiles((prevData: any) => {
           const updatedFiles = [...prevData, ...data]
           return updatedFiles
@@ -52,7 +53,7 @@ export default function Page() {
   return (
     <main className="h-screen flex flex-col">
       <HamburgerMenu />
-      <MediaTypeSelector mediaType={mediaType} setMediaType={setMediaType} />
+      <MediaTypeSelector mediaType={mediaType} setMediaType={setMediaType} setMediaFiles={setMediaFiles} />
 
       {mediaType === 'image' && (
         <ImageLayout mediaFiles={mediaFiles} refProp={ref} noData={noData} />
