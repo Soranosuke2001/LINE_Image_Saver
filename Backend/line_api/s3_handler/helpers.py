@@ -133,19 +133,40 @@ def construct_filtered_video_data(data):
     }, id, object_path
 
 
-# Created filtered data object
-def construct_filtered_data(data, event_type):
-    id = data[f'{event_type}_url']
+def construct_filtered_audio_data(data):
+    id = data['audio_url']
     user_id = data['user_id']
+    duration = data['duration_ms']
     timestamp, month_taken = get_month(data['timestamp'])
     object_path = f'{user_id}/{month_taken}/{id}'
     url = f'https://{BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_path}'
 
     return {
-        f'{event_type}_id': id,
-        f'{event_type}_url': url,
+        'audio_id': id,
+        'audio_url': url,
+        'duration': duration,
         "user_id": user_id,
         "timestamp": timestamp,
     }, id, object_path
 
- 
+
+def construct_filtered_file_data(data):
+    id = data['file_url']
+    filename = data['filename']
+    filesize_bytes = data['filesize_bytes']
+    user_id = data['user_id']
+    duration = data['duration_ms']
+    timestamp, month_taken = get_month(data['timestamp'])
+    object_path = f'{user_id}/{month_taken}/{id}'
+    url = f'https://{BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{object_path}'
+
+    return {
+        'file_id': id,
+        'file_url': url,
+        'filename': filename,
+        'filesize_bytes': filesize_bytes,
+        'duration': duration,
+        "user_id": user_id,
+        "timestamp": timestamp,
+    }, id, object_path
+

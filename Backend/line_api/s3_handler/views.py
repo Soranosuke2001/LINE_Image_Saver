@@ -25,9 +25,10 @@ from .models import (
 )
 
 from .helpers import (
-  construct_filtered_data,
   construct_filtered_image_data,
   construct_filtered_video_data,
+  construct_filtered_audio_data,
+  construct_filtered_file_data,
   fetch_binary_data,
   binary_image_convert,
   s3_upload,
@@ -120,7 +121,7 @@ class S3VideoUploadEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3AudioUploadEvent(APIView):
   def post(self, request, format=None):
-    filtered_data, audio_id, object_path = construct_filtered_data(request.data, 'audio')
+    filtered_data, audio_id, object_path = construct_filtered_audio_data(request.data)
 
     # save the image details to the model
     serializer = S3LineAudioSerializer(data=filtered_data)
@@ -158,7 +159,7 @@ class S3AudioUploadEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3FileUploadEvent(APIView):
   def post(self, request, format=None):
-    filtered_data, file_id, object_path = construct_filtered_data(request.data, 'file')
+    filtered_data, file_id, object_path = construct_filtered_file_data(request.data)
 
     # save the image details to the model
     serializer = S3LineFileSerializer(data=filtered_data)

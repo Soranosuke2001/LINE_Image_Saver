@@ -38,6 +38,7 @@ class S3LineAudioSerializer(serializers.ModelSerializer):
     fields = [
       "audio_id",
       "audio_url",
+      "duration",
       "user_id",
       "timestamp",
     ]
@@ -49,6 +50,8 @@ class S3LineFileSerializer(serializers.ModelSerializer):
     fields = [
       "file_id",
       "file_url",
+      "filename",
+      "filesize_bytes",
       "user_id",
       "timestamp",
     ]
