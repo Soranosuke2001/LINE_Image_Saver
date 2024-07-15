@@ -15,7 +15,7 @@ const NoData = () => {
         <FiInbox size={50} />
         <h1 className="font-bold text-3xl">No Data to Show</h1>
         <p className="font-light text-center">
-          It looks like you haven't uploaded any files that the system was not
+          It looks like you haven&apos;t uploaded any files that the system was not
           able to detect.
         </p>
         <p className="font-light text-center">
