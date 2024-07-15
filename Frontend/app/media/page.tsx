@@ -35,6 +35,7 @@ export default function Page() {
       } else if (data === "NoData") {
         setNoData(true)
       } else {
+        setNoData(false)
         setMediaFiles((prevData: any) => {
           const updatedFiles = [...prevData, ...data]
           return updatedFiles
