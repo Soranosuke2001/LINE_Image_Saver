@@ -24,3 +24,5 @@ export const imageFrameProps = [
     src: 'wallpaper3.jpg',
   },
 ]
+
+export const lineLoginLink = 'https://help.line.me/official_account_jp/ios/categoryId/20008250/pc?contentId=20013136'

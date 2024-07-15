@@ -68,7 +68,7 @@ export default function Page() {
             <CreateLineAccButton />
           </div>
 
-          {stepDetails.map((step, index) => (
+          {stepDetails.map(step => (
             <div key={step.id}>
               <h2 className={cn(outfit_font.className, "text-2xl")}>
                 {step.title}
