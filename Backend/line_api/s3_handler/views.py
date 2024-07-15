@@ -82,7 +82,7 @@ class S3ImageUploadEvent(APIView):
 @method_decorator(csrf_exempt, name='dispatch')
 class S3VideoUploadEvent(APIView):
   def post(self, request, format=None):
-    filtered_data, video_id, object_path = construct_filtered_video_data(request.data, 'video')
+    filtered_data, video_id, object_path = construct_filtered_video_data(request.data)
 
     # save the image details to the model
     serializer = S3LineVideoSerializer(data=filtered_data)
