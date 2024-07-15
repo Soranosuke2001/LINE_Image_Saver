@@ -13,12 +13,6 @@ export type ImageData = {
   timestamp: string;
 };
 
-export type ImageType = {
-  data: ImageData[];
-  month: string;
-  year: string;
-};
-
 export type VideoData = {
   video_id: string;
   video_url: string;
@@ -27,8 +21,19 @@ export type VideoData = {
   timestamp: string;
 };
 
-export type VideoType = {
-  data: VideoData[];
-  month: string;
-  year: string;
+export type AudioData = {
+  audio_id: string;
+  audio_url: string;
+  duration: number;
+  timestamp: string;
 };
+
+export type FileData = {
+  file_id: string;
+  file_url: string;
+  filename: string;
+  filesize_bytes: number;
+  duration: number;
+  timestamp: string;
+};
+
