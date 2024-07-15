@@ -27,6 +27,7 @@ class S3LineVideo(models.Model):
 class S3LineAudio(models.Model):
   audio_id = models.CharField(max_length=256)
   audio_url = models.CharField(max_length=256)
+  duration = models.IntegerField()
   user_id = models.CharField(max_length=256)
   timestamp = models.DateTimeField()
 
@@ -37,6 +38,8 @@ class S3LineAudio(models.Model):
 class S3LineFile(models.Model):
   file_id = models.CharField(max_length=256)
   file_url = models.CharField(max_length=256)
+  filename = models.CharField(max_length=256)
+  filesize_bytes = models.IntegerField()
   user_id = models.CharField(max_length=256)
   timestamp = models.DateTimeField()
 
