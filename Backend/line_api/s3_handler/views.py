@@ -202,7 +202,7 @@ class S3ImageFetchEvent(APIView):
       recent_image = S3LineImage.objects.all().order_by('-timestamp').first()
 
       if not recent_image:
-        return Response([], status=status.HTTP_200_OK)
+        return Response({ 'media_files': [], 'month': None, 'year': None }, status=status.HTTP_200_OK)
       
       month = recent_image.timestamp.month
       year = recent_image.timestamp.year
@@ -240,13 +240,13 @@ class S3VideoFetchEvent(APIView):
     initial = request.query_params.get('initial')
 
     if initial:
-      recent_image = S3LineVideo.objects.all().order_by('-timestamp').first()
+      recent_video = S3LineVideo.objects.all().order_by('-timestamp').first()
 
-      if not recent_image:
-        return Response([], status=status.HTTP_200_OK)
+      if not recent_video:
+        return Response({ 'media_files': [], 'month': None, 'year': None }, status=status.HTTP_200_OK)
       
-      month = recent_image.timestamp.month
-      year = recent_image.timestamp.year
+      month = recent_video.timestamp.month
+      year = recent_video.timestamp.year
     else:
       month = request.query_params.get('month')
       year = request.query_params.get('year')
@@ -280,13 +280,13 @@ class S3AudioFetchEvent(APIView):
     initial = request.query_params.get('initial')
 
     if initial:
-      recent_image = S3LineAudio.objects.all().order_by('-timestamp').first()
+      recent_audio = S3LineAudio.objects.all().order_by('-timestamp').first()
 
-      if not recent_image:
-        return Response([], status=status.HTTP_200_OK)
+      if not recent_audio:
+        return Response({ 'media_files': [], 'month': None, 'year': None }, status=status.HTTP_200_OK)
       
-      month = recent_image.timestamp.month
-      year = recent_image.timestamp.year
+      month = recent_audio.timestamp.month
+      year = recent_audio.timestamp.year
     else:
       month = request.query_params.get('month')
       year = request.query_params.get('year')
@@ -320,13 +320,13 @@ class S3FileFetchEvent(APIView):
     initial = request.query_params.get('initial')
 
     if initial:
-      recent_image = S3LineFile.objects.all().order_by('-timestamp').first()
+      recent_file = S3LineFile.objects.all().order_by('-timestamp').first()
 
-      if not recent_image:
-        return Response([], status=status.HTTP_200_OK)
+      if not recent_file:
+        return Response({ 'media_files': [], 'month': None, 'year': None }, status=status.HTTP_200_OK)
       
-      month = recent_image.timestamp.month
-      year = recent_image.timestamp.year
+      month = recent_file.timestamp.month
+      year = recent_file.timestamp.year
     else:
       month = request.query_params.get('month')
       year = request.query_params.get('year')
