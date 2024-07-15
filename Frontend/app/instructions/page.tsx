@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import { HamburgerMenu } from "@/components/HamburgerMenu";
 import CreateLineAccButton from "@/components/InstructionsLayout/CreateLineAccButton";
 import LoginButton from "@/components/InstructionsLayout/LoginButton";
-import MediaPageButton from "@/components/InstructionsLayout/MediaPageButton";
 
 const stepDetails = [
   {
@@ -41,7 +40,7 @@ const stepDetails = [
     image_alt: null,
     description:
       "You can then view all files that have been automatically backed up!",
-    button: <MediaPageButton />,
+    button: null,
   },
 ];
 
