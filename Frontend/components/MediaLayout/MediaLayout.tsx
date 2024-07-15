@@ -2,10 +2,11 @@ import React from "react";
 
 import NoData from "./NoData";
 import SectionTitle from "./SectionTitle";
-import ImageLayout from "./ImageMedia/ImageLayout";
 
+import ImageLayout from "./ImageMedia/ImageLayout";
 import VideoLayout from "./VideoMedia/VideoLayout";
 import AudioLayout from "./AudioMedia/AudioLayout";
+import FileLayout from "./FileMedia/FileLayout";
 
 const MediaLayout = ({
   mediaType,
@@ -25,7 +26,7 @@ const MediaLayout = ({
         <div key={index} className="mb-5">
           <SectionTitle year={year} month={month} />
 
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-2 gap-x-2">
             {mediaType === "image" && (
               <ImageLayout imageData={data} noData={noData} refProp={refProp} />
             )}
@@ -34,6 +35,9 @@ const MediaLayout = ({
             )}
             {mediaType === "audio" && (
               <AudioLayout audioData={data} noData={noData} refProp={refProp}/>
+            )}
+            {mediaType === "file" && (
+              <FileLayout fileData={data} noData={noData} refProp={refProp}/>
             )}
           </div>
         </div>
