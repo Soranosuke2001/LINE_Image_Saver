@@ -13,23 +13,35 @@ export const fetchMediaFiles = async (mediaType: string) => {
     return "NoData";
   }
 
-  const mediaFiles = data.map(
-    ({
-      image_id,
-      image_url,
-      timestamp,
-    }: {
-      image_id: string;
-      image_url: string;
-      timestamp: string;
-    }) => {
+  let mediaFiles = null;
+
+  if (mediaType === "image") {
+    mediaFiles = data.map((image: any) => {
       return {
-        image_id,
-        image_url,
-        timestamp: new Date(timestamp),
+        ...image,
+        timestamp: new Date(image.timestamp),
       };
-    }
-  );
+    });
+  } else if (mediaType === "video") {
+    mediaFiles = data.map((video: any) => {
+      return {
+        ...video,
+        timestamp: new Date(video.timestamp),
+      };
+    });
+  } else if (mediaType === "audio") {
+    mediaFiles = data.map((audio: any) => {
+      return {
+        ...audio,
+      };
+    });
+  } else {
+    mediaFiles = data.map((file: any) => {
+      return {
+        ...file,
+      };
+    });
+  }
 
   return [
     {
