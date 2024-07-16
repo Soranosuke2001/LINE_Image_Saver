@@ -60,7 +60,6 @@ export function HamburgerMenu() {
             <MenubarItem onClick={() => router.push('/media')}>Media</MenubarItem>
             <MenubarSeparator />
             
-            <MenubarItem>Settings</MenubarItem>
             <MenubarItem
               onClick={() => logoutHandler()}
               className="flex justify-between"
