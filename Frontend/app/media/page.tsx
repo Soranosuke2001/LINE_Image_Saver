@@ -15,6 +15,7 @@ export default function Page() {
   const [mediaType, setMediaType] = useState<string>("image");
   const [mediaFiles, setMediaFiles] = useState<any>([]);
   const [noData, setNoData] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false)
 
   const lastImageRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
@@ -24,6 +25,7 @@ export default function Page() {
 
   useEffect(() => {
     const fetchMedia = async () => {
+      setIsFetching(true)
       const data = await fetchMediaFiles(mediaType);
 
       if (data === "Error") {
@@ -41,6 +43,8 @@ export default function Page() {
           return updatedFiles;
         });
       }
+
+      setIsFetching(false)
     };
 
     if (entry?.isIntersecting) {
@@ -59,7 +63,7 @@ export default function Page() {
         setMediaFiles={setMediaFiles}
       />
 
-      <MediaLayout mediaType={mediaType} mediaFiles={mediaFiles} refProp={ref} noData={noData} />
+      <MediaLayout mediaType={mediaType} mediaFiles={mediaFiles} refProp={ref} noData={noData} isFetching={isFetching} />
     </main>
   );
 }

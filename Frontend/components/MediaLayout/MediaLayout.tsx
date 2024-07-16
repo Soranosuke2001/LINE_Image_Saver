@@ -7,17 +7,20 @@ import ImageLayout from "./ImageMedia/ImageLayout";
 import VideoLayout from "./VideoMedia/VideoLayout";
 import AudioLayout from "./AudioMedia/AudioLayout";
 import FileLayout from "./FileMedia/FileLayout";
+import { Loader2 } from "lucide-react";
 
 const MediaLayout = ({
   mediaType,
   mediaFiles,
   refProp,
   noData,
+  isFetching,
 }: {
   mediaType: string;
   mediaFiles: any;
   refProp: any;
   noData: boolean;
+  isFetching: boolean;
 }) => {
   return (
     <div className="flex-1 mt-12 w-full overflow-auto border-4 border-solid border-white">
@@ -42,6 +45,11 @@ const MediaLayout = ({
           </div>
         </div>
       ))}
+      {isFetching && (
+        <div className="w-full flex justify-center">
+          <Loader2 className="animate-spin" />
+        </div>
+      )}
     </div>
   );
 };
